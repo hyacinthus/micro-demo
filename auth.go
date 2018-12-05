@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-redis/cache"
 	"github.com/hyacinthus/x/xerr"
+	"github.com/hyacinthus/x/cc"
 	"github.com/labstack/echo"
 	"github.com/sirupsen/logrus"
 )
@@ -60,7 +61,7 @@ func login(c echo.Context) error {
 			// 这个userid应该是检索出来的，这里为demo写死。
 			UserID: 1,
 		}
-		setcc("token:"+t.Token, t, time.Hour*96)
+		cc.Set("token:"+t.Token, t, time.Hour*96)
 	} else {
 		return xerr.ErrAuthFailed
 	}
@@ -106,7 +107,7 @@ func validator(token string, c echo.Context) (bool, error) {
 	}
 	// 寻找token
 	var t *Token
-	err := getcc("token:"+token, t)
+	err := cc.Get("token:"+token, t)
 	if err == cache.ErrCacheMiss {
 		return false, nil
 	} else if err != nil {

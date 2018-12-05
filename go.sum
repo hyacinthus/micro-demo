@@ -39,6 +39,8 @@ github.com/hyacinthus/x v0.0.0-20181204133837-d8e49b162242 h1:Y+LkP4UkT1zpR58PUC
 github.com/hyacinthus/x v0.0.0-20181204133837-d8e49b162242/go.mod h1:WfhhD9m6uYY5Vskd4ya2CAmddDY1jsWA2gwRiqkd87s=
 github.com/hyacinthus/x v0.0.0-20181204152311-f34a957b4962 h1:6zYc4UMT5mjLzn5Gi6XrcwX2mIt2vFSNGhSGaXUejP8=
 github.com/hyacinthus/x v0.0.0-20181204152311-f34a957b4962/go.mod h1:WfhhD9m6uYY5Vskd4ya2CAmddDY1jsWA2gwRiqkd87s=
+github.com/hyacinthus/x v0.0.0-20181205122549-c1980aa169fd h1:V45ujcXuBCZ+aa/J6ilW9pS1YMfSDmzgIBXTvIQxTcM=
+github.com/hyacinthus/x v0.0.0-20181205122549-c1980aa169fd/go.mod h1:kO1NjSq7WszL2u4tLwawZPKS8vGe+gB+Z3hIVnUXkcw=
 github.com/jinzhu/configor v0.0.0-20180614024415-4edaf76fe188 h1:XFhKsrhg0SBbAGFKWbwK81YkfbNyO2QItYQ05jqbpAU=
 github.com/jinzhu/configor v0.0.0-20180614024415-4edaf76fe188/go.mod h1:xycrO0mK6seJRAHXsdyk54QgPJ20aQNpTGi5xv8jQg8=
 github.com/jinzhu/gorm v1.9.1 h1:lDSDtsCt5AGGSKTs8AHlSDbbgif4G4+CKJ8ETBDVHTA=
@@ -72,6 +74,9 @@ github.com/sirupsen/logrus v1.1.1-0.20181006134200-3f90cee1e41a h1:QKI9DQPta/87m
 github.com/sirupsen/logrus v1.1.1-0.20181006134200-3f90cee1e41a/go.mod h1:zrgwTnHtNr00buQ1vSptGe8m1f/BbgsPukg8qsT7A+A=
 github.com/sirupsen/logrus v1.1.1 h1:VzGj7lhU7KEB9e9gMpAV/v5XT2NVSvLJhJLCWbnkgXg=
 github.com/sirupsen/logrus v1.1.1/go.mod h1:zrgwTnHtNr00buQ1vSptGe8m1f/BbgsPukg8qsT7A+A=
+github.com/sirupsen/logrus v1.2.0 h1:juTguoYk5qI21pwyTXY3B3Y5cOTH3ZUyZCg1v/mihuo=
+github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
+github.com/stretchr/objx v0.1.1/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
 github.com/swaggo/echo-swagger v0.0.0-20180315045949-97f46bb9e5a5 h1:yU0aDQpp0Dq4BAu8rrHnVdC6SZS0LceJVLCUCbGasbE=
 github.com/swaggo/echo-swagger v0.0.0-20180315045949-97f46bb9e5a5/go.mod h1:mGVJdredle61MBSrJEnaLjKYU0qXJ5V5aNsBgypcUCY=
