@@ -1,19 +1,22 @@
 # build app
 FROM golang AS build-env
 
-ADD . /restdemo
+RUN go get -u github.com/swaggo/swag/cmd/swag
 
-WORKDIR /restdemo
+ADD . /app
 
-RUN go build
+WORKDIR /app
+
+RUN swag init
+RUN go build -o app
 
 # safe image
 FROM debian
 
 ENV TZ=Asia/Shanghai
 
-COPY --from=build-env /restdemo/restdemo /usr/bin/restdemo
+COPY --from=build-env /app/app /usr/bin/app
 
 EXPOSE 1324
 
-CMD ["restdemo"]
+CMD ["app"]
