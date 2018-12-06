@@ -5,9 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"strings"
-
-	uuid "github.com/satori/go.uuid"
-	"github.com/sirupsen/logrus"
 )
 
 // FileURL 图片链接
@@ -56,13 +53,4 @@ func (f *FileURL) Scan(src interface{}) error {
 // Value implements the driver Valuer interface.
 func (f FileURL) Value() (driver.Value, error) {
 	return string(f), nil
-}
-
-func newUUID() string {
-	id, err := uuid.NewV1()
-	if err != nil {
-		logrus.Errorf("Gen uuid Error:%s", err.Error())
-		return "error"
-	}
-	return id.String()
 }

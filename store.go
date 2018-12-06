@@ -9,6 +9,16 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+func initRedis() {
+	// redis conn
+	rdb = redis.NewClient(&redis.Options{
+		Addr:     config.Redis.Host + ":" + config.Redis.Port,
+		Password: config.Redis.Password,
+		DB:       config.Redis.DB,
+	})
+	log.Info("Redis connect successful.")
+}
+
 func initDB() {
 	var err error
 	// mysql conn
@@ -33,15 +43,5 @@ func initDB() {
 
 // createTable gorm auto migrate tables
 func createTables() {
-	db.AutoMigrate(&Note{})
-}
-
-func initRedis() {
-	// redis conn
-	rdb = redis.NewClient(&redis.Options{
-		Addr:     config.Redis.Host + ":" + config.Redis.Port,
-		Password: config.Redis.Password,
-		DB:       config.Redis.DB,
-	})
-	log.Info("Redis connect successful.")
+	db.AutoMigrate(&Entity{})
 }

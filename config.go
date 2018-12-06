@@ -8,12 +8,13 @@ import (
 
 var config = struct {
 	APP struct {
-		Debug    bool   `default:"false"`
-		Host     string `default:"0.0.0.0"`
-		Port     string `default:"1324"`
-		PageSize int    `default:"10"`
-		BaseURL  string `default:"https://api.example.com/"`
-		FileURL  string `default:"https://static.example.com/"`
+		Debug     bool   `default:"false"`
+		Host      string `default:"0.0.0.0"`
+		Port      string `default:"1324"`
+		PageSize  int    `default:"10"`
+		JWTSecret string `default:"secret"`
+		BaseURL   string `default:"https://api.example.com/"`
+		FileURL   string `default:"https://static.example.com/"`
 	}
 
 	DB struct {
@@ -32,6 +33,7 @@ var config = struct {
 	}
 }{}
 
+// the only init func
 func init() {
 	godotenv.Load()
 	configor.Load(&config)
