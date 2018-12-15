@@ -29,6 +29,7 @@ require (
 	github.com/onsi/ginkgo v1.7.0 // indirect
 	github.com/onsi/gomega v1.4.3 // indirect
 	github.com/pkg/errors v0.8.0 // indirect
+	github.com/rs/xid v1.2.1
 	github.com/sirupsen/logrus v1.2.0
 	github.com/swaggo/echo-swagger v0.0.0-20180315045949-97f46bb9e5a5
 	github.com/swaggo/files v0.0.0-20180215091130-49c8a91ea3fa // indirect

@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// FileURL 图片链接
+// FileURL ===============图片链接==============
 type FileURL string
 
 // ToString 转换为string类型
