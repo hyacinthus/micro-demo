@@ -2,8 +2,6 @@ package main
 
 import (
 	"net/http"
-	"strconv"
-	"time"
 
 	"github.com/hyacinthus/x/xerr"
 	"github.com/labstack/echo"
@@ -11,15 +9,10 @@ import (
 
 // Entity 实体样例
 type Entity struct {
-	ID int `json:"id" gorm:"primary_key"`
+	ID
 	// 标题
 	Title string `json:"title"`
-	// 创建时间
-	CreatedAt time.Time `json:"created_at"`
-	// 最后更新时间
-	UpdatedAt time.Time `json:"updated_at"`
-	// 软删除
-	DeletedAt *time.Time `json:"-"`
+	Time
 }
 
 // EntityUpdate 更新请求结构体，用指针可以判断是否有请求这个字段
@@ -28,7 +21,7 @@ type EntityUpdate struct {
 	Title *string `json:"title"`
 }
 
-func findEntityByID(id int) (*Entity, error) {
+func findEntityByID(id string) (*Entity, error) {
 	var r = new(Entity)
 	if err := db.Where("id = ?", id).First(r).Error; err != nil {
 		return nil, err
@@ -83,10 +76,7 @@ func createEntity(c echo.Context) error {
 // @Router /entities/{id} [put]
 func updateEntity(c echo.Context) error {
 	// 获取URL中的ID
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		return xerr.New(400, "InvalidID", "请在URL中提供合法的ID")
-	}
+	id := c.Param("id")
 	var n = new(EntityUpdate)
 	if err := c.Bind(n); err != nil {
 		return err
@@ -125,12 +115,9 @@ func updateEntity(c echo.Context) error {
 // @Security ApiKeyAuth
 // @Router /entities/{id} [delete]
 func deleteEntity(c echo.Context) error {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		return xerr.New(400, "InvalidID", "请在URL中提供合法的ID")
-	}
+	id := c.Param("id")
 	// 删除数据库对象
-	if err := db.Delete(&Entity{ID: id}).Error; err != nil {
+	if err := db.Where("id = ?", id).Delete(&Entity{}).Error; err != nil {
 		return err
 	}
 	return c.NoContent(http.StatusNoContent)
@@ -150,10 +137,7 @@ func deleteEntity(c echo.Context) error {
 // @Security ApiKeyAuth
 // @Router /entities/{id} [get]
 func getEntity(c echo.Context) error {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		return xerr.New(400, "InvalidID", "请在URL中提供合法的ID")
-	}
+	id := c.Param("id")
 	r, err := findEntityByID(id)
 	if err != nil {
 		return err
