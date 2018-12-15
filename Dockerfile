@@ -1,13 +1,10 @@
 # build app
 FROM golang AS build-env
 
-RUN go get -u github.com/swaggo/swag/cmd/swag
-
 ADD . /app
 
 WORKDIR /app
 
-RUN swag init
 RUN go build -o app
 
 # safe image
