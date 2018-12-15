@@ -1,12 +1,7 @@
 package main
 
-import (
-	"github.com/jinzhu/configor"
-	"github.com/joho/godotenv"
-	"github.com/sirupsen/logrus"
-)
-
-var config = struct {
+// Config is the global settings of this project
+type Config struct {
 	APP struct {
 		Debug     bool   `default:"false"`
 		Host      string `default:"0.0.0.0"`
@@ -15,6 +10,7 @@ var config = struct {
 		JWTSecret string `default:"secret"`
 		BaseURL   string `default:"https://api.example.com/"`
 		FileURL   string `default:"https://static.example.com/"`
+		ImageURL  string `default:"https://image.example.com/"`
 	}
 
 	DB struct {
@@ -31,19 +27,11 @@ var config = struct {
 		Password string
 		DB       int `default:"0"`
 	}
-}{}
 
-// the only init func
-func init() {
-	godotenv.Load()
-	configor.Load(&config)
-	if config.APP.Debug {
-		logrus.SetFormatter(&logrus.TextFormatter{
-			FullTimestamp:   true,
-			TimestampFormat: "06-01-02 15:04:05.00",
-		})
-		logrus.SetLevel(logrus.DebugLevel)
-	} else {
-		logrus.SetLevel(logrus.InfoLevel)
+	QCloud struct {
+		SecretID  string
+		SecretKey string
+		Region    string `default:"ap-shanghai"`
+		AppID     string `default:"1234567"`
 	}
 }

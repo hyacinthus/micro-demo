@@ -3,10 +3,9 @@ package main
 import (
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"github.com/go-redis/redis"
 	"github.com/jinzhu/gorm"
-"github.com/rs/xid"
+	"github.com/rs/xid"
 )
 
 // ID 实体共用字段
@@ -30,7 +29,6 @@ func (id *ID) BeforeCreate(scope *gorm.Scope) error {
 	return nil
 }
 
-
 func initRedis() {
 	// redis conn
 	rdb = redis.NewClient(&redis.Options{
@@ -38,7 +36,7 @@ func initRedis() {
 		Password: config.Redis.Password,
 		DB:       config.Redis.DB,
 	})
-	logrus.Info("Redis connect successful.")
+	log.Info("Redis connect successful.")
 }
 
 func initDB() {
@@ -49,11 +47,11 @@ func initDB() {
 			"@tcp("+config.DB.Host+":"+config.DB.Port+")/"+config.DB.Name+
 			"?charset=utf8mb4&parseTime=True&loc=Local&timeout=90s")
 		if err != nil {
-			logrus.WithError(err).Warn("waiting for connect to db")
+			log.WithError(err).Warn("waiting for connect to db")
 			time.Sleep(time.Second * 2)
 			continue
 		}
-		logrus.Info("Mysql connect successful.")
+		log.Info("Mysql connect successful.")
 		break
 	}
 
