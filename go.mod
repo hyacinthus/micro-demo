@@ -15,7 +15,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1 // indirect
 	github.com/gofrs/uuid v3.1.0+incompatible // indirect
 	github.com/google/go-cmp v0.2.0 // indirect
-	github.com/hyacinthus/x v0.0.0-20181214151759-313ccc0f2146
+	github.com/hyacinthus/x v0.0.0-20181216030222-082e01432f95
 	github.com/jinzhu/configor v0.0.0-20180614024415-4edaf76fe188
 	github.com/jinzhu/gorm v1.9.2
 	github.com/jinzhu/now v0.0.0-20181116074157-8ec929ed50c3 // indirect
@@ -24,6 +24,7 @@ require (
 	github.com/labstack/echo v0.0.0-20181205161348-3f8b45c8d0dd
 	github.com/lib/pq v1.0.0 // indirect
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
+	github.com/nsqio/go-nsq v1.0.7
 	github.com/onsi/ginkgo v1.7.0 // indirect
 	github.com/onsi/gomega v1.4.3 // indirect
 	github.com/pkg/errors v0.8.0 // indirect

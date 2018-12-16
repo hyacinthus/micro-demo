@@ -1,11 +1,15 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/hyacinthus/x/xerr"
 	"github.com/labstack/echo"
+	nsq "github.com/nsqio/go-nsq"
 )
+
+// ============= 模型部分 ==============
 
 // Entity 实体样例
 type Entity struct {
@@ -21,6 +25,8 @@ type EntityUpdate struct {
 	Title *string `json:"title"`
 }
 
+// ============= 业务部分 ==============
+
 func findEntityByID(id string) (*Entity, error) {
 	var r = new(Entity)
 	if err := db.Where("id = ?", id).First(r).Error; err != nil {
@@ -28,6 +34,24 @@ func findEntityByID(id string) (*Entity, error) {
 	}
 	return r, nil
 }
+
+// ============= 事件处理部分 ==============
+
+// ReceiveEntity 处理收到的对象
+// Topic: entity_new Channel: ske
+// Body: Entity
+func ReceiveEntity(msg *nsq.Message) error {
+	entity := new(Entity)
+	err := json.Unmarshal(msg.Body, entity)
+	if err != nil {
+		log.WithError(err).Errorf("接收到的消息格式错误: %+v", msg)
+		return err
+	}
+	log.Info(entity)
+	return nil
+}
+
+// ============= REST 部分 ==============
 
 // createEntity 新建实体
 // @Tags 实体

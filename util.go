@@ -7,7 +7,9 @@ import (
 	"strings"
 )
 
-// FileURL ===============图片链接==============
+// ===============图片链接==============
+
+// FileURL 文件链接
 type FileURL string
 
 // ToString 转换为string类型
@@ -55,7 +57,9 @@ func (f FileURL) Value() (driver.Value, error) {
 	return string(f), nil
 }
 
-// Tags ===========标签列表===========
+// ===========标签列表===========
+
+// Tags 标签列表
 type Tags []string
 
 // String 转换为string类型

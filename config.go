@@ -28,6 +28,11 @@ type Config struct {
 		DB       int `default:"0"`
 	}
 
+	NSQ struct {
+		NsqdAddr       string `default:"nsqd:4150"`
+		NsqLookupdAddr string `default:"nsqlookupd:4161"`
+	}
+
 	QCloud struct {
 		SecretID  string
 		SecretKey string

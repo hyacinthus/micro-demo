@@ -3,19 +3,22 @@ package main
 import (
 	"net/http"
 
+	"github.com/hyacinthus/x/xnsq"
+
 	"github.com/go-redis/redis"
 	"github.com/hyacinthus/x/auth"
 	"github.com/hyacinthus/x/cc"
 	"github.com/hyacinthus/x/object"
 	"github.com/hyacinthus/x/page"
 	"github.com/hyacinthus/x/xerr"
+	"github.com/hyacinthus/x/xlog"
 	"github.com/jinzhu/configor"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/sirupsen/logrus"
+	nsq "github.com/nsqio/go-nsq"
 )
 
 // 定义全区变量 为了保证执行顺序 初始化均在main中执行
@@ -23,11 +26,13 @@ var (
 	// config
 	config = new(Config)
 	// Logger
-	log *logrus.Logger
+	log = xlog.Get()
 	// gorm mysql db connection
 	db *gorm.DB
 	// redis client
 	rdb *redis.Client
+	// nsq producer
+	producer *nsq.Producer
 	// cos client
 	img *object.Client
 )
@@ -38,16 +43,9 @@ func init() {
 	godotenv.Load()
 	configor.Load(config)
 
-	// logger
-	log = logrus.New()
+	// debug
 	if config.APP.Debug {
-		log.SetFormatter(&logrus.TextFormatter{
-			FullTimestamp:   true,
-			TimestampFormat: "06-01-02 15:04:05.00",
-		})
-		log.SetLevel(logrus.DebugLevel)
-	} else {
-		log.SetLevel(logrus.InfoLevel)
+		xlog.Debug()
 	}
 
 	// init gorm and redis
@@ -56,6 +54,10 @@ func init() {
 
 	// init global cache
 	cc.Init(rdb)
+
+	// init nsq
+	xnsq.Init(config.NSQ.NsqdAddr, config.NSQ.NsqLookupdAddr)
+	producer = xnsq.Producer()
 
 	// init cos client
 	img = object.New(&object.Config{
@@ -85,7 +87,10 @@ func init() {
 // @BasePath /
 func main() {
 	defer clean()
-	// init echo
+	// ========== NSQ =============
+	xnsq.Reg("entity_new", "ske", ReceiveEntity)
+
+	// ========== Echo ============
 	e := echo.New()
 
 	// error handler
@@ -109,27 +114,15 @@ func main() {
 		SuccessHandler: auth.ParseJWT,
 	}))
 
-	// init mysql and redis
-	initDB()
-	defer db.Close()
-	initRedis()
-	defer rdb.Close()
-
-	// init global cache
-	cc.Init(rdb)
-
-	// async create tables
-	go createTables()
-
 	// status
 	e.GET("/status", getStatus)
 
 	// note Routes
-	e.GET("/notes", getEntitys)
-	e.POST("/notes", createEntity)
-	e.GET("/notes/:id", getEntity)
-	e.PUT("/notes/:id", updateEntity)
-	e.DELETE("/notes/:id", deleteEntity)
+	e.GET("/entities", getEntitys)
+	e.POST("/entities", createEntity)
+	e.GET("/entities/:id", getEntity)
+	e.PUT("/entities/:id", updateEntity)
+	e.DELETE("/entities/:id", deleteEntity)
 
 	// Start echo server
 	e.Logger.Fatal(e.Start(config.APP.Host + ":" + config.APP.Port))
