@@ -51,6 +51,7 @@ func initDB() {
 			time.Sleep(time.Second * 2)
 			continue
 		}
+		db.DB().SetConnMaxLifetime(time.Duration(config.DB.Lifetime) * time.Second)
 		log.Info("Mysql connect successful.")
 		break
 	}

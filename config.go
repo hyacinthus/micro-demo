@@ -19,6 +19,7 @@ type Config struct {
 		User     string `default:"root"`
 		Password string `default:"root"`
 		Name     string `default:"demo"`
+		Lifetime int    `default:"3000"`
 	}
 
 	Redis struct {
