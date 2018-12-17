@@ -14,6 +14,6 @@ ENV TZ=Asia/Shanghai
 
 COPY --from=build-env /app/app /usr/bin/app
 
-EXPOSE 1324
+EXPOSE 80
 
 CMD ["app"]

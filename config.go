@@ -5,7 +5,7 @@ type Config struct {
 	APP struct {
 		Debug     bool   `default:"false"`
 		Host      string `default:"0.0.0.0"`
-		Port      string `default:"1324"`
+		Port      string `default:"80"`
 		PageSize  int    `default:"10"`
 		JWTSecret string `default:"secret"`
 		BaseURL   string `default:"https://api.example.com/"`
