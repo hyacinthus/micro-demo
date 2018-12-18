@@ -9,12 +9,14 @@
 有一些地方实在抽象不出去，复制项目后需要核对修改
 
 - config 配置
-- store 初始化数据库和 redis
-- util 自定义类型
+- store 用 config 初始化 mysql 和 redis
+- util 需要用到 config 的自定义类型
 
 ## 业务部分
 
-entity 是个 demo，每个实体一个文件写下去就好
+- entity 是个 demo，每个实体一个文件写下去就好
+- entity 的模型在子 package ske 中，为了模型可以导出被别的服务使用
+- 在 package ske 中，可以直接将模型的纯函数还有 sdk 和模型写在一起
 
 ## 注意事项
 
