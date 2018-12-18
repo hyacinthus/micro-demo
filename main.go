@@ -33,7 +33,7 @@ var (
 	// nsq producer
 	producer *nsq.Producer
 	// cos client
-	img *object.Client
+	obj *object.Client
 )
 
 // the only init func
@@ -59,7 +59,7 @@ func init() {
 	producer = xnsq.Producer()
 
 	// init cos client
-	img = object.New(&object.Config{
+	obj = object.New(&object.Config{
 		AppID:     config.QCloud.AppID,
 		Region:    config.QCloud.Region,
 		Bucket:    "image", // 注意修改这里
