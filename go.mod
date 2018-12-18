@@ -10,7 +10,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1 // indirect
 	github.com/gofrs/uuid v3.1.0+incompatible // indirect
 	github.com/google/go-cmp v0.2.0 // indirect
-	github.com/hyacinthus/x v0.0.0-20181216031543-32a0fe3e3fb9
+	github.com/hyacinthus/x v0.0.0-20181218040359-238641f2a438
 	github.com/jinzhu/configor v0.0.0-20180614024415-4edaf76fe188
 	github.com/jinzhu/gorm v1.9.2
 	github.com/jinzhu/now v0.0.0-20181116074157-8ec929ed50c3 // indirect

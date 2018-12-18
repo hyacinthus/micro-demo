@@ -3,8 +3,6 @@ package main
 import (
 	"net/http"
 
-	"github.com/hyacinthus/x/xnsq"
-
 	"github.com/go-redis/redis"
 	"github.com/hyacinthus/x/auth"
 	"github.com/hyacinthus/x/cc"
@@ -12,6 +10,7 @@ import (
 	"github.com/hyacinthus/x/page"
 	"github.com/hyacinthus/x/xerr"
 	"github.com/hyacinthus/x/xlog"
+	"github.com/hyacinthus/x/xnsq"
 	"github.com/jinzhu/configor"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -73,18 +72,6 @@ func init() {
 
 }
 
-// @title RESTful API DEMO by Golang & Echo
-// @version 1.0
-// @description This is a demo server.
-
-// @contact.name Muninn
-// @contact.email hyacinthus@gmail.com
-
-// @license.name MIT
-// @license.url https://github.com/hyacinthus/restdemo/blob/master/LICENSE
-
-// @host demo.crandom.com
-// @BasePath /
 func main() {
 	defer clean()
 	// ========== NSQ =============
@@ -116,6 +103,7 @@ func main() {
 
 	// status
 	e.GET("/status", getStatus)
+	e.GET("/", getStatus)
 
 	// note Routes
 	e.GET("/entities", getEntitys)

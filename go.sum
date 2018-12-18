@@ -36,6 +36,8 @@ github.com/hyacinthus/x v0.0.0-20181216030222-082e01432f95 h1:7mNdtJacGXWgg2wJAA
 github.com/hyacinthus/x v0.0.0-20181216030222-082e01432f95/go.mod h1:7w5Q2bNz+G7BYuEDbhW/ShrVyFicAf4WEDATE6H59N8=
 github.com/hyacinthus/x v0.0.0-20181216031543-32a0fe3e3fb9 h1:pliP84cqW68nt063/9kG/5W8vy290R0y4xl83ZAZAbw=
 github.com/hyacinthus/x v0.0.0-20181216031543-32a0fe3e3fb9/go.mod h1:7w5Q2bNz+G7BYuEDbhW/ShrVyFicAf4WEDATE6H59N8=
+github.com/hyacinthus/x v0.0.0-20181218040359-238641f2a438 h1:Y0Jehroqj+ZpHFiu+u5tebFQ4K8TldpTVTpHDct9pvU=
+github.com/hyacinthus/x v0.0.0-20181218040359-238641f2a438/go.mod h1:Ij9KRdRVP9lbVrycuh2RtxbEl9zgNpGwb0IFNQiILgk=
 github.com/jinzhu/configor v0.0.0-20180614024415-4edaf76fe188 h1:XFhKsrhg0SBbAGFKWbwK81YkfbNyO2QItYQ05jqbpAU=
 github.com/jinzhu/configor v0.0.0-20180614024415-4edaf76fe188/go.mod h1:xycrO0mK6seJRAHXsdyk54QgPJ20aQNpTGi5xv8jQg8=
 github.com/jinzhu/gorm v1.9.2 h1:lCvgEaqe/HVE+tjAR2mt4HbbHAZsQOv3XAZiEZV37iw=

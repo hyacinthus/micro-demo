@@ -5,29 +5,9 @@ import (
 
 	"github.com/go-redis/redis"
 	"github.com/jinzhu/gorm"
-	"github.com/rs/xid"
+
+	"github.com/hyacinthus/ske/ske"
 )
-
-// ID 实体共用字段
-type ID struct {
-	ID string `json:"id" gorm:"type:varchar(20);primary_key"`
-}
-
-// Time 实体共用字段
-type Time struct {
-	// 创建时间
-	CreatedAt time.Time `json:"created_at"`
-	// 最后更新时间
-	UpdatedAt time.Time `json:"updated_at"`
-	// 软删除
-	DeletedAt *time.Time `json:"-"`
-}
-
-// BeforeCreate GORM hook
-func (id *ID) BeforeCreate(scope *gorm.Scope) error {
-	scope.SetColumn("ID", xid.New().String())
-	return nil
-}
 
 func initRedis() {
 	// redis conn
@@ -64,5 +44,5 @@ func initDB() {
 
 // createTable gorm auto migrate tables
 func createTables() {
-	db.AutoMigrate(&Entity{})
+	db.AutoMigrate(&ske.Entity{})
 }
