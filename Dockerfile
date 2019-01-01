@@ -8,9 +8,7 @@ WORKDIR /app
 RUN go build -o app
 
 # safe image
-FROM debian
-
-ENV TZ=Asia/Shanghai
+FROM muninn/debian
 
 COPY --from=build-env /app/app /usr/bin/app
 
