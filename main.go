@@ -95,7 +95,7 @@ func main() {
 	}
 
 	// auth group
-	a := e.Group("/")
+	a := e.Group("")
 	a.Use(middleware.JWTWithConfig(middleware.JWTConfig{
 		SigningKey:     []byte(config.APP.JWTSecret),
 		SuccessHandler: auth.ParseJWT,

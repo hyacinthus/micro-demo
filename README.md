@@ -18,19 +18,32 @@
 - entity 的模型在子 package ske 中，为了模型可以导出被别的服务使用
 - 在 package ske 中，可以直接将模型的纯函数还有 sdk 和模型写在一起
 
-## 其他
+## 认证
 
-- endpoint 要不要认证在路由中根据分组决定
+- endpoint 可以分为三组
+  - 通过 gateway 暴露，需要认证
+  - 通过 gateway 暴露，公开
+  - 只能内部服务间访问，公开
 - 认证的接口必定能在 context 中取到相关字段
+  - jwt 方案解析 token 写入 context
+  - oauth 方案配合 session 读出常用的权限写入 context 即可
 
 ## 微服务支持
 
 为了支持微服务，并保持代码简洁不做过多分层，做了如下工作：
 
-- 服务间访问依然使用 http 协议，这样代码量少
+- 服务间同步访问依然使用 http 协议，这样代码量少
 - 将业务模型、模型的方法、sdk 放在 ske 这个 package
 - 别的语言直接通过内部 rest api 访问，为 golang 提供 sdk
 - 如果追求极致性能，服务间访问可切换至 grpc , 只需要修改 ske package 的内容即可
+
+部署方面,中小项目可以按照下边的极简方案来，需要学习的东西最少。大项目上各种微服
+务工具都是支持的。
+
+- 服务发现和负载均衡使用 docker swarm 即可，内部直接用服务名访问别的服务。
+- API gateway 可以选用 nginx 或者 caddy
+- 使用事件驱动思想，能异步的交互全部用异步，采用 nsq 等 pub/sub 模型的消息队列实
+  现。
 
 ## Dockerfile
 
