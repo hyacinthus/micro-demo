@@ -18,6 +18,7 @@ require (
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/kr/pty v1.1.3 // indirect
 	github.com/labstack/echo v0.0.0-20181205161348-3f8b45c8d0dd
+	github.com/levigross/grequests v0.0.0-20181123014746-f3f67e7783bb
 	github.com/lib/pq v1.0.0 // indirect
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
 	github.com/mozillazg/go-cos v0.11.0 // indirect

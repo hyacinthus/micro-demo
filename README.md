@@ -9,7 +9,7 @@
 有一些地方实在抽象不出去，复制项目后需要核对修改
 
 - config 配置
-- store 用 config 初始化 mysql 和 redis
+- store 用 config 初始化 mysql 和 redis , 顺便用 gorm 建表。
 - util 需要用到 config 的自定义类型
 
 ## 业务部分
