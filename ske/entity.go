@@ -38,7 +38,7 @@ func SetEntityURL(url string) {
 // GetEntity 拉取指定实体
 func GetEntity(id string) (*Entity, error) {
 	var entity = new(Entity)
-	r, err := grequests.Get(entityURL+"entities/"+id, nil)
+	r, err := grequests.Get(entityURL+"sys/entities/"+id, nil)
 	if err != nil {
 		return nil, err
 	}

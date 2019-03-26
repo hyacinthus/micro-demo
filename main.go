@@ -94,23 +94,38 @@ func main() {
 		e.Debug = true
 	}
 
-	// auth group
-	a := e.Group("")
-	a.Use(middleware.JWTWithConfig(middleware.JWTConfig{
+	// user group
+	// 需要用户登录后才能调用
+	user := e.Group("")
+	user.Use(middleware.JWTWithConfig(middleware.JWTConfig{
 		SigningKey:     []byte(config.APP.JWTSecret),
 		SuccessHandler: auth.ParseJWT,
 	}))
+
+	// admin group
+	// 需要管理员登录后才能调用
+	// TODO: 现在在登录环节调用不同的登录接口 将来考虑这里换个parse方法解析管理员详细权限
+	admin := e.Group("admin")
+	admin.Use(middleware.JWTWithConfig(middleware.JWTConfig{
+		SigningKey:     []byte(config.APP.JWTSecret),
+		SuccessHandler: auth.ParseJWT,
+	}))
+
+	// sys group
+	// 微服务间内部调用，不验证，不在中间件暴露到外界
+	sys := e.Group("sys")
 
 	// status
 	e.GET("/status", getStatus)
 	e.GET("/", getStatus)
 
-	// note Routes
-	e.GET("/entities", getEntitys)
-	e.POST("/entities", createEntity)
-	e.GET("/entities/:id", getEntity)
-	e.PUT("/entities/:id", updateEntity)
-	e.DELETE("/entities/:id", deleteEntity)
+	// entity Routes
+	user.GET("/entities", userGetEntitys)
+	user.POST("/entities", userCreateEntity)
+	user.GET("/entities/:id", userGetEntity)
+	user.PUT("/entities/:id", userUpdateEntity)
+	user.DELETE("/entities/:id", userDeleteEntity)
+	sys.GET("/entities/:id", sysGetEntity)
 
 	// Start echo server
 	e.Logger.Fatal(e.Start(config.APP.Host + ":" + config.APP.Port))
