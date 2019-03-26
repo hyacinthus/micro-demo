@@ -28,17 +28,10 @@ func (e *Entity) SomeMethod() {
 
 // ============== SDK ==============
 
-var entityURL = "http://ske/"
-
-// SetEntityURL 供使用者修改
-func SetEntityURL(url string) {
-	entityURL = url
-}
-
 // GetEntity 拉取指定实体
 func GetEntity(id string) (*Entity, error) {
 	var entity = new(Entity)
-	r, err := grequests.Get(entityURL+"sys/entities/"+id, nil)
+	r, err := grequests.Get(addr+"sys/entities/"+id, nil)
 	if err != nil {
 		return nil, err
 	}
