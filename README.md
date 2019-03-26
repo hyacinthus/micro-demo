@@ -10,7 +10,6 @@
 
 - config 配置
 - store 用 config 初始化 mysql 和 redis , 顺便用 gorm 建表。
-- util 需要用到 config 的自定义类型
 
 ## 业务部分
 
@@ -20,10 +19,11 @@
 
 ## 认证
 
-- endpoint 可以分为三组
-  - 通过 gateway 暴露，需要认证
-  - 通过 gateway 暴露，公开
-  - 只能内部服务间访问，公开
+- endpoint 可以分为四组
+  - 默认 通过 gateway 暴露，公开
+  - user 通过 gateway 暴露，需要用户登录认证
+  - admin 通过 gateway 暴露，需要管理员登录认证
+  - sys 只能内部服务间访问，内部公开
 - 认证的接口必定能在 context 中取到相关字段
   - jwt 方案解析 token 写入 context
   - oauth 方案配合 session 读出常用的权限写入 context 即可
@@ -33,8 +33,8 @@
 为了支持微服务，并保持代码简洁不做过多分层，做了如下工作：
 
 - 服务间同步访问依然使用 http 协议，这样代码量少
+- 服务间接口为 golang 提供 sdk
 - 将业务模型、模型的方法、sdk 放在 ske 这个 package
-- 别的语言直接通过内部 rest api 访问，为 golang 提供 sdk
 - 如果追求极致性能，服务间访问可切换至 grpc , 只需要修改 ske package 的内容即可
 
 部署方面,中小项目可以按照下边的极简方案来，需要学习的东西最少。大项目上各种微服
