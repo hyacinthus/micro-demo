@@ -9,8 +9,6 @@ type Config struct {
 		PageSize  int    `default:"10"`
 		JWTSecret string `default:"secret"`
 		BaseURL   string `default:"https://api.example.com/"`
-		FileURL   string `default:"https://static.example.com/"`
-		ImageURL  string `default:"https://image.example.com/"`
 	}
 
 	DB struct {
